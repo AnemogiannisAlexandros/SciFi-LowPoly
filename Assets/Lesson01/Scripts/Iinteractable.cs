@@ -1,4 +1,4 @@
-﻿namespace Lesson01
+﻿namespace Interfaces
 {
     public interface IInteractable
     {
