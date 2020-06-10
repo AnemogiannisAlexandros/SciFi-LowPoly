@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary>
@@ -15,12 +16,17 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimationmanager animationManager;
 
     [SerializeField]
-    private float movementSpeed=1,sprintSpeed=2;
+    private float movementSpeed = 1, sprintSpeed = 2,jumpForce = 8;
 
-    float horizontal, vertical;
+    private float gravity = 20.0f;
+
+    private Vector3 moveDirection = Vector3.zero;
+
+
+
     public Vector2 GetInput() 
     {
-        return new Vector2(horizontal, vertical);
+        return new Vector2(moveDirection.x, moveDirection.z);
     }
     void Start()
     {
@@ -30,20 +36,30 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!InputManager.Instance.GetInputMethod().SprintKey())
+        if (characterController.isGrounded)
         {
-            MoveCharacter(movementSpeed);
+            Debug.Log("Grounded");
+            moveDirection = transform.right * Input.GetAxis("Horizontal") + Input.GetAxis("Vertical")*transform.forward;
+            if (!InputManager.Instance.GetInputMethod().SprintKey())
+            {
+                moveDirection *= movementSpeed;
+            }
+            else
+            {
+                moveDirection *= sprintSpeed;
+            }
+            if (InputManager.Instance.GetInputMethod().JumpKey())
+            {
+                moveDirection.y = jumpForce;
+            }
         }
-        else 
+        else
         {
-            MoveCharacter(sprintSpeed);
+            Debug.Log("Not Grounded");
+
+            moveDirection.y -= gravity * Time.deltaTime;
+
         }
-    }
-    void MoveCharacter(float speed)
-    {
-        horizontal = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
-        vertical = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
-        characterController.Move(transform.forward * vertical + transform.right * horizontal);
-        animationManager.SetMovement(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 }
