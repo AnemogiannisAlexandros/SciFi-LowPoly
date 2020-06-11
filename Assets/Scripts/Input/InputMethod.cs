@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Base Class for all Input Methods.
+/// Contains all keys we will need in the game
+/// and assigns default Keyboard/Mouse input.
+/// </summary>
 public class InputMethod : ScriptableObject,IInput
 {
     [SerializeField]

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Input Interface with bool functions
+/// </summary>
 public interface IInput
 {
     bool FireKey();

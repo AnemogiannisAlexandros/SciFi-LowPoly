@@ -9,13 +9,18 @@ using UnityEngine.Animations;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerAnimationmanager : MonoBehaviour
 {
+    //Animator component attached to the player
     private Animator animator;
-    private PlayerMovement movementInput;
-    // Start is called before the first frame update
+
+
     void Start()
     {
-        animator = GetComponent<Animator>();
-        movementInput = GetComponent<PlayerMovement>();
+        TryGetComponent<Animator>(out animator);
+    }
+
+    public void SetJump(string jump) 
+    {
+        animator.Play(jump,-1,0);
     }
 
     public void SetMovement(Vector2 axesinput) 
