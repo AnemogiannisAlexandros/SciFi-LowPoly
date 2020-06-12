@@ -18,6 +18,10 @@ public class PlayerAnimationmanager : MonoBehaviour
         TryGetComponent<Animator>(out animator);
     }
 
+    public void SetAim(bool isAiming) 
+    {
+        animator.SetBool("IsAiming", isAiming);
+    }
     public void SetJump(string jump) 
     {
         animator.Play(jump,-1,0);

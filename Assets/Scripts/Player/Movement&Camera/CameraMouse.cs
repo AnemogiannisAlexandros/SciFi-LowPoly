@@ -14,6 +14,9 @@ public class CameraMouse : MonoBehaviour
     //Is The player Focusing?
     [SerializeField]
     private bool isFocusing = false;
+
+    [SerializeField]
+    private float cameraMinMaxY = 90;
     //Mouse Sensitivity
     [SerializeField]
     private float sensitivity = 1, smoothing = 5,forwardOffset = 0;
@@ -38,6 +41,8 @@ public class CameraMouse : MonoBehaviour
     //PlayerMovement Reference
     private PlayerMovement playerMovement;
 
+    private PlayerAnimationmanager animManager;
+
     GameObject character;
     //starting height of our cam for the head bob to bounce between
     private float camStartHeight;
@@ -49,6 +54,7 @@ public class CameraMouse : MonoBehaviour
         character = this.transform.parent.gameObject;
         //Cursor.lockState = CursorLockMode.Locked;
         playerMovement = GetComponentInParent<PlayerMovement>();
+        transform.parent.TryGetComponent<PlayerAnimationmanager>(out animManager);
         camStartHeight = transform.localPosition.y;
         curHeadBobFraction = 0.5f;
     }
@@ -58,6 +64,7 @@ public class CameraMouse : MonoBehaviour
     {
         //Check if focusing and adjust FOV
         isFocusing = Input.GetKey(KeyCode.Mouse1) ? true : false;
+        animManager.SetAim(isFocusing);
         if (isFocusing)
         {
             Camera.main.fieldOfView = Mathf.SmoothDamp(Camera.main.fieldOfView, FocusFOV, ref focusVelocity, FOVchangeLerpSpeed);
@@ -74,7 +81,7 @@ public class CameraMouse : MonoBehaviour
         smoothV.x = Mathf.Lerp(smoothV.x, mouseDir.x, 1f / smoothing);
         smoothV.y = Mathf.Lerp(smoothV.y, mouseDir.y, 1f / smoothing);
         mouseLook += smoothV;
-        mouseLook.y = Mathf.Clamp(mouseLook.y, -90f, 90f);
+        mouseLook.y = Mathf.Clamp(mouseLook.y, -cameraMinMaxY, cameraMinMaxY);
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up);

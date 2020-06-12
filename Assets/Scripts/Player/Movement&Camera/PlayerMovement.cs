@@ -51,10 +51,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 moveDirection *= sprintSpeed;
             }
-            Debug.Log("Grounded");
             if (InputManager.Instance.GetInputMethod().JumpKey())
             {
-                Debug.Log("Jump");
                 moveDirection.y += Mathf.Sqrt(jumpHeight * -2f * gravity);
                 animationManager.SetJump("Jump");
             }
@@ -62,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             moveDirection += (transform.right * horizontal * airSpeed + transform.forward * vertical * airSpeed + transform.up * gravity) * Time.deltaTime;
-            Debug.Log("Not Grounded");
         }
         characterController.Move(moveDirection * Time.deltaTime);
         animationManager.SetMovement(new Vector2(horizontal, vertical));
