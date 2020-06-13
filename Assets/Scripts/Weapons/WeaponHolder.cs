@@ -5,10 +5,10 @@ using UnityEngine;
 public class WeaponHolder : MonoBehaviour
 {
     public Weapon weapon;
-
+    public GameObject objectToInstantiate;
     private void Start()
     {
-        weapon.objectToInstantiate = gameObject;
+        weapon.SetObjectToInstantiate(objectToInstantiate);
     }
 
     public void OnTriggerEnter(Collider other)

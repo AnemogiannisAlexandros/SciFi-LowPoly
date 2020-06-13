@@ -20,28 +20,37 @@ public class Pistol : Weapon
         canShoot = fireRateTimer >= 0 ? false : true;
 
         hasBulletsInMag = currentBulletsInMag > 0 ? true : false;
-
-        WeaponChecks();
+        if (isReloading)
+        {
+            reloadTimer -= Time.deltaTime;
+            if (reloadTimer <= 0)
+            {
+                currentBulletsInMag = stats.GetMagazineSize();
+                isReloading = false;
+                reloadTimer = stats.GetRealoadTime();
+                Debug.Log("Reload Done");
+            }
+        }
+        else 
+        {
+            WeaponChecks();
+        }
     }
 
     public override void Reload()
     {
         Debug.Log("Reloading my pistol");
         isReloading = true;
-        reloadTimer -= Time.deltaTime;
-        if (reloadTimer <= 0) 
-        {
-            currentBulletsInMag = stats.GetMagazineSize();
-            isReloading = false;
-            reloadTimer = stats.GetRealoadTime();
-        }
     }
     public override void Shoot()
     {
-        Debug.Log("Shooting my pistol  for : " + stats.GetDamage());
-        currentBulletsInMag--;
-        fireRateTimer = stats.GetFireRate();
-        Debug.Log("Bullets Left : " + currentBulletsInMag);
+        GameObject go = GetPooledObject();
+        if (go != null) 
+        {
+            go.SetActive(true);
+            currentBulletsInMag--;
+            fireRateTimer = stats.GetFireRate();
+        }
     }
     private void WeaponChecks() 
     {

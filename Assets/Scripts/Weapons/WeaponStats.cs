@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,9 @@ public class WeaponStats : ScriptableObject
     [Tooltip("Type of damage this Weapon Does")]
     [SerializeField]
     protected DamageType damageType;
+    [Tooltip("The Type of Bullets this weapon Uses")]
+    [SerializeField]
+    protected BulletType bulletType;
 
     public int GetDamage()
     {
@@ -64,8 +68,16 @@ public class WeaponStats : ScriptableObject
     {
         return fireRate;
     }
-    public int GetMagazineSize() 
+    public int GetMagazineSize()
     {
         return magazineSize;
+    }
+    public DamageType GetDamageType() 
+    {
+        return damageType;
+    }
+    public BulletType GetBulletType() 
+    {
+        return bulletType;
     }
 }

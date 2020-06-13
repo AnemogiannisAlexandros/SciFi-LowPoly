@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab99953ad47d8e488127e40db780ac4, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: a6d1d27a5bc6f3b429e836472a11b6f2, type: 3}
+  m_Name: New Pistol Bulet
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: bca77e66a03a3cf47bdcef234d943915, type: 2}
-  objectToInstantiate: {fileID: 8231443754935805200, guid: 973290491520a554aaba99a3cbe02e42,
+  bulletPrefab: {fileID: 6057206811977425347, guid: 1a755cc9af1eee3409f497c86c99c7da,
     type: 3}
+  isPhysical: 1
+  bulletForce: 5

@@ -8,9 +8,8 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager Instance { get; private set; }
 
     [SerializeField]
-    private Transform spawnPosition;
+    private Transform spawnPosition = null;
     private Weapon currentWeapon;
-
     public UnityEvent OutOfBullets;
 
     private void Awake()
@@ -41,7 +40,9 @@ public class WeaponManager : MonoBehaviour
     {
         currentWeapon = weapon;
         currentWeapon.Init();
-        Instantiate(weapon.objectToInstantiate, spawnPosition.position,Quaternion.identity, spawnPosition);
+        GameObject go = Instantiate(currentWeapon.GetObjectToInstantiate(), spawnPosition.position, Quaternion.identity, spawnPosition);
+        currentWeapon.SetFiringPosition(go.GetComponentInChildren<FiringPoint>().transform);
+        StartCoroutine(CreateBullets());
     }
     public Weapon GetCurrentWeapon() 
     {
@@ -50,5 +51,18 @@ public class WeaponManager : MonoBehaviour
     public Transform GetSpawnPosition() 
     {
         return spawnPosition;
+    }
+    IEnumerator CreateBullets() 
+    {
+        int i = 0;
+        GameObject bulletPrefab = currentWeapon.bullet.GetBulletPrefab();
+        Transform firingPosition = currentWeapon.GetFiringPosition();
+        while (i < currentWeapon.GetBulletPool().Length) 
+        {
+            currentWeapon.GetBulletPool()[i] = Instantiate(bulletPrefab, firingPosition.position,Quaternion.identity,firingPosition);
+            currentWeapon.GetBulletPool()[i].GetComponent<Bullet>().SetBulletStats(currentWeapon.bullet);
+            i++;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

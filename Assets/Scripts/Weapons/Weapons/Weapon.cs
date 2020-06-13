@@ -5,8 +5,12 @@ using UnityEngine;
 public abstract class Weapon : ScriptableObject, IFireable
 {
     public WeaponStats stats;
-    public GameObject objectToInstantiate;
+    protected GameObject objectToInstantiate;
+    protected Transform firingPosition;
+    public BaseBullet bullet;
 
+    //The Pool of Bullets this weapon will have
+    protected GameObject[] bulletPool = null;
     //Returns true when fireRate allows for another bullet to be shot.
     protected bool canShoot;
     //Returns true if the player is reloading 
@@ -22,11 +26,46 @@ public abstract class Weapon : ScriptableObject, IFireable
     //The time that has to pass for the player to reload
     protected float reloadTimer;
 
+    protected GameObject GetPooledObject() 
+    {
+        for (int i = 0; i < bulletPool.Length; i++)
+        {
+            if (!bulletPool[i].activeInHierarchy)
+            {
+                return bulletPool[i];
+            }
+        }
+        return null;
+    }
+    public void SetObjectToInstantiate(GameObject gameObject)
+    {
+        objectToInstantiate = gameObject;
+    }
+    public void SetFiringPosition(Transform position) 
+    {
+        firingPosition = position;
+    }
+    public GameObject GetObjectToInstantiate() 
+    {
+        return objectToInstantiate;
+    }
+    public Transform GetFiringPosition() 
+    {
+        return firingPosition;
+    }
+    public GameObject[] GetBulletPool() 
+    {
+        return bulletPool;
+    }
     public virtual void Init() 
     {
         canShoot = true;
         fireRateTimer = 1 / stats.GetFireRate();
         reloadTimer = stats.GetRealoadTime();
+        bulletPool = new GameObject[stats.GetMagazineSize() * 2];
+        bullet.DamagePerBullet = stats.GetDamage();
+        bullet.DamageType = stats.GetDamageType();
+        bullet.BulletType = stats.GetBulletType();
     }
     public abstract void Reload();
 
