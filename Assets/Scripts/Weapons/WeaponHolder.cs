@@ -16,7 +16,7 @@ public class WeaponHolder : MonoBehaviour
         if (other.CompareTag("Player")) 
         {
             Debug.Log("Player Hit");
-            WeaponManager.Instance.SetCurrentWeapon(weapon);
+            WeaponManager.Instance.AddWeapon(weapon,true);
             Destroy(this.gameObject);
         }
     }

@@ -48,6 +48,8 @@ public class Pistol : Weapon
         if (go != null) 
         {
             go.SetActive(true);
+            go.transform.position = firingPosition.position;
+            go.transform.rotation = firingPosition.rotation;
             currentBulletsInMag--;
             fireRateTimer = stats.GetFireRate();
         }

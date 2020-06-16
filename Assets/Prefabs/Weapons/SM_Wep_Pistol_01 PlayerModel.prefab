@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_Pistol_01 PlayerModel
       objectReference: {fileID: 0}
+    - target: {fileID: 8231443754935805200, guid: 973290491520a554aaba99a3cbe02e42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1091701205, guid: 973290491520a554aaba99a3cbe02e42, type: 3}
     - {fileID: 8901357490097007091, guid: 973290491520a554aaba99a3cbe02e42, type: 3}
