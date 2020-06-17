@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     private BaseBullet bulletStats;
     private Rigidbody rb;
+    PlayerMovement moveDirection;
     public void SetBulletStats(BaseBullet stats) 
     {
         bulletStats = stats;
@@ -18,11 +19,13 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        moveDirection = FindObjectOfType<PlayerMovement>();
+
     }
     private void OnEnable()
     {
         bulletStats.BulletStart();
-        bulletStats.ApplyInstantForce(rb);
+        bulletStats.ApplyInstantForce(rb, Camera.main.transform.forward);
     }
     private void Update()
     {

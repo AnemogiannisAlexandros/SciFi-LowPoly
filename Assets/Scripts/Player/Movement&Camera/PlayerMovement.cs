@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     {
         return new Vector2(moveDirection.x, moveDirection.z);
     }
+    public Vector3 GetMoveDirection() 
+    {
+        return moveDirection * Time.deltaTime;
+    }
     void Start()
     {
         

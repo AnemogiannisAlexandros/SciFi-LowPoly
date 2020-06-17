@@ -38,10 +38,13 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
-
+        for (int i = 0; i <= bulletHolders.Length - 1; i++) 
+        {
+            bulletHolders[i] = transform.GetChild(i).gameObject;
+        }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (equippedWeapons[currentWeaponIndex] != null) 
         {
@@ -72,8 +75,8 @@ public class WeaponManager : MonoBehaviour
             if (equippedWeapons[i] == null) 
             {
                 equippedWeapons[i] = newWeapon;
-                weapons[i] = Instantiate(equippedWeapons[i].GetObjectToInstantiate(), weaponPosition.position, Quaternion.identity, weaponPosition);
-                equippedWeapons[i].SetFiringPosition(weapons[i].transform);
+                weapons[i] = Instantiate(equippedWeapons[i].GetObjectToInstantiate(), weaponPosition.position, weaponPosition.rotation, weaponPosition);
+                equippedWeapons[i].SetFiringPosition(weapons[i].GetComponentInChildren<FiringPoint>().transform);
                 equippedWeapons[i].Init();
                 StartCoroutine(CreateBullets(i));
                 if (enabled) 

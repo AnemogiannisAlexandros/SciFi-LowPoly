@@ -60,7 +60,6 @@ public abstract class Weapon : ScriptableObject, IFireable
     public virtual void Init() 
     {
         canShoot = true;
-        fireRateTimer = 1 / stats.GetFireRate();
         reloadTimer = stats.GetRealoadTime();
         bulletPool = new GameObject[stats.GetMagazineSize() * 2];
         bullet.DamagePerBullet = stats.GetDamage();

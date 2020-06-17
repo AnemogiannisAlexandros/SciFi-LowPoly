@@ -16,7 +16,8 @@ MonoBehaviour:
   accuracy: 100
   handling: 100
   reloadTime: 1.5
-  fireRate: 1
-  magazineSize: 3
+  fireRate: 36
+  magazineSize: 45
   critDamage: 200
   damageType: 0
+  bulletType: 0

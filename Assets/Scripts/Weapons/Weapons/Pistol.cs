@@ -11,6 +11,7 @@ public class Pistol : Weapon
         base.Init();
         hasBulletsInInventory = true;
         currentBulletsInMag = stats.GetMagazineSize();
+        fireRateTimer = 0;
     }
 
     public override void WeaponUpdate() 
@@ -47,11 +48,10 @@ public class Pistol : Weapon
         GameObject go = GetPooledObject();
         if (go != null) 
         {
-            go.SetActive(true);
             go.transform.position = firingPosition.position;
-            go.transform.rotation = firingPosition.rotation;
+            go.SetActive(true);
             currentBulletsInMag--;
-            fireRateTimer = stats.GetFireRate();
+            fireRateTimer = 1/stats.GetFireRate();
         }
     }
     private void WeaponChecks() 
