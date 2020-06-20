@@ -54,6 +54,18 @@ public class Pistol : Weapon
             fireRateTimer = 1/stats.GetFireRate();
         }
     }
+    void CalculateOffset() 
+    {
+
+    }
+    void ApplySpread() 
+    {
+
+    }
+    void ApplyRetract() 
+    {
+
+    }
     private void WeaponChecks() 
     {
         if (InputManager.Instance.GetInputMethod().FireKey())

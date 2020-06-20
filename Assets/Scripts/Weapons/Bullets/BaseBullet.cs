@@ -45,7 +45,7 @@ public abstract class BaseBullet : ScriptableObject,IBullet
 
     public abstract void ApplyInstantForce(Rigidbody rb,Vector3 direction);
 }
-
+#if (UNITY_EDITOR) 
 [CustomEditor(typeof(BaseBullet),true)]
 public class BaseBulletEditor : Editor 
 {
@@ -82,4 +82,5 @@ public class BaseBulletEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
 

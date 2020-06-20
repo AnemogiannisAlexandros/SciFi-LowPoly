@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: ClassicPistolStats
   m_EditorClassIdentifier: Assembly-CSharp::PistolsStats
   damage: 42
-  accuracy: 100
+  accuracy:
+    accuracyPercent: 0
+    maxSpread: 0
+    minSpread: 0
+    expandPercent: 0
+    retractPercent: 0
+    retractDelay: 0
+    offset: {x: 0, y: 0, z: 1}
   handling: 100
   reloadTime: 1.5
   fireRate: 36

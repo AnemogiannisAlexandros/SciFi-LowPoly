@@ -25,7 +25,9 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         bulletStats.BulletStart();
-        bulletStats.ApplyInstantForce(rb, Camera.main.transform.forward);
+        Vector3 offset = WeaponManager.Instance.GetCurrentWeapon().stats.GetAccuracy().offset;
+        offset  = Camera.main.transform.TransformDirection(offset);
+        bulletStats.ApplyInstantForce(rb,offset.normalized);
     }
     private void Update()
     {

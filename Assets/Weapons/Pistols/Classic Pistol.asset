@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: bca77e66a03a3cf47bdcef234d943915, type: 2}
   bullet: {fileID: 11400000, guid: 890c014992ba4b544bd4343ac2f33d84, type: 2}
+  CrosshairTexture: {fileID: 21300000, guid: 3c468f41b58c21048ae96ab4ea3b38f1, type: 3}
+  weaponName: Classic Pistol

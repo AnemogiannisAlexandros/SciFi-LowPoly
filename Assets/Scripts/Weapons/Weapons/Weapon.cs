@@ -9,6 +9,12 @@ public abstract class Weapon : ScriptableObject, IFireable
     protected Transform firingPosition;
     public BaseBullet bullet;
 
+    //The Crosshair This Weapon will Have
+    [SerializeField]
+    protected Sprite CrosshairTexture;
+    //How this weapon will be called
+    [SerializeField]
+    protected string weaponName;
     //The Pool of Bullets this weapon will have
     protected GameObject[] bulletPool = null;
     //Returns true when fireRate allows for another bullet to be shot.
@@ -26,7 +32,7 @@ public abstract class Weapon : ScriptableObject, IFireable
     //The time that has to pass for the player to reload
     protected float reloadTimer;
 
-    protected GameObject GetPooledObject() 
+    protected GameObject GetPooledObject()
     {
         for (int i = 0; i < bulletPool.Length; i++)
         {
@@ -36,6 +42,10 @@ public abstract class Weapon : ScriptableObject, IFireable
             }
         }
         return null;
+    }
+    public Sprite GetCrosshair()
+    {
+        return CrosshairTexture;
     }
     public void SetObjectToInstantiate(GameObject gameObject)
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class WeaponManager : MonoBehaviour
     private Transform weaponPosition = null;
     [SerializeField]
     private GameObject[] bulletHolders = new GameObject[weaponSlots];
+    [SerializeField]
+    private Image CrosshairImage;
     
     public UnityEvent OutOfBullets;
 
