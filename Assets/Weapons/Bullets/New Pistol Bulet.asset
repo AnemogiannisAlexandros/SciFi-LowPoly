@@ -15,5 +15,5 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6057206811977425347, guid: 1a755cc9af1eee3409f497c86c99c7da,
     type: 3}
   isPhysical: 1
-  gravityScale: 0
-  bulletForce: 100
+  gravityScale: 9
+  bulletForce: 304.8

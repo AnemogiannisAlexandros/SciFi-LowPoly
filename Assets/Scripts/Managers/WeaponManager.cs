@@ -77,7 +77,8 @@ public class WeaponManager : MonoBehaviour
         {
             if (equippedWeapons[i] == null) 
             {
-                equippedWeapons[i] = newWeapon;
+                equippedWeapons[i] = Instantiate(newWeapon);
+                equippedWeapons[i].Init(newWeapon.stats, newWeapon.bullet);
                 weapons[i] = Instantiate(equippedWeapons[i].GetObjectToInstantiate(), weaponPosition.position, weaponPosition.rotation, weaponPosition);
                 equippedWeapons[i].SetFiringPosition(weapons[i].GetComponentInChildren<FiringPoint>().transform);
                 equippedWeapons[i].Init();
@@ -137,11 +138,11 @@ public class WeaponManager : MonoBehaviour
     IEnumerator CreateBullets(int weaponIndex)
     {
         int i = 0;
-        GameObject bulletPrefab = equippedWeapons[weaponIndex].bullet.GetBulletPrefab();
+        GameObject bulletPrefab = equippedWeapons[weaponIndex].GetBullet().GetBulletPrefab();
         while (i < equippedWeapons[weaponIndex].GetBulletPool().Length)
         {
             equippedWeapons[weaponIndex].GetBulletPool()[i] = Instantiate(bulletPrefab, bulletHolders[weaponIndex].transform.position, Quaternion.identity, bulletHolders[weaponIndex].transform);
-            equippedWeapons[weaponIndex].GetBulletPool()[i].GetComponent<Bullet>().SetBulletStats(equippedWeapons[weaponIndex].bullet);
+            equippedWeapons[weaponIndex].GetBulletPool()[i].GetComponent<Bullet>().SetBulletStats(equippedWeapons[weaponIndex].GetBullet());
             i++;
             yield return new WaitForEndOfFrame();
         }

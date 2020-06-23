@@ -5,9 +5,19 @@ using UnityEngine;
 public abstract class Weapon : ScriptableObject, IFireable
 {
     public WeaponStats stats;
-    protected GameObject objectToInstantiate;
+    private WeaponStats newStats;
+    public GameObject objectToInstantiate;
     protected Transform firingPosition;
     public BaseBullet bullet;
+    private BaseBullet newBullet;
+
+    public void Init(WeaponStats stats, BaseBullet bullet)
+    {
+        //newStats = (WeaponStats)CreateInstance(stats.GetType());
+        //newBullet = (BaseBullet)CreateInstance(bullet.GetType());
+        newStats = Instantiate(stats);
+        newBullet = Instantiate(bullet);
+    }
 
     //The Crosshair This Weapon will Have
     [SerializeField]
@@ -32,6 +42,14 @@ public abstract class Weapon : ScriptableObject, IFireable
     //The time that has to pass for the player to reload
     protected float reloadTimer;
 
+    public WeaponStats GetStats()
+    {
+        return newStats;
+    }
+    public BaseBullet GetBullet()
+    {
+        return newBullet;
+    }
     protected GameObject GetPooledObject()
     {
         for (int i = 0; i < bulletPool.Length; i++)
@@ -70,11 +88,11 @@ public abstract class Weapon : ScriptableObject, IFireable
     public virtual void Init() 
     {
         canShoot = true;
-        reloadTimer = stats.GetRealoadTime();
-        bulletPool = new GameObject[stats.GetMagazineSize() * 2];
-        bullet.DamagePerBullet = stats.GetDamage();
-        bullet.DamageType = stats.GetDamageType();
-        bullet.BulletType = stats.GetBulletType();
+        reloadTimer = GetStats().GetRealoadTime();
+        bulletPool = new GameObject[GetStats().GetMagazineSize() * 2];
+        GetBullet().DamagePerBullet = GetStats().GetDamage();
+        GetBullet().DamageType = GetStats().GetDamageType();
+        GetBullet().BulletType = GetStats().GetBulletType();
     }
     public abstract void Reload();
 

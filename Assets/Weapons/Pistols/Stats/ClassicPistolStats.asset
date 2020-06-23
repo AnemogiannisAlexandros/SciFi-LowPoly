@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: ClassicPistolStats
   m_EditorClassIdentifier: Assembly-CSharp::PistolsStats
-  damage: 42
+  damage: 12
   accuracy:
     accuracyPercent: 0
     maxSpread: 0
-    minSpread: 0
+    minSpread: 0.0045
     expandPercent: 0
     retractPercent: 0
     retractDelay: 0
-    offset: {x: 0, y: 0, z: 1}
   handling: 100
-  reloadTime: 1.5
-  fireRate: 36
-  magazineSize: 45
+  reloadTime: 1.25
+  fireRate: 8.5
+  magazineSize: 10
   critDamage: 200
   damageType: 0
   bulletType: 0

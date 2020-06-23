@@ -48,6 +48,7 @@ public class Pistol : Weapon
         GameObject go = GetPooledObject();
         if (go != null) 
         {
+            stats.CalculatedOffset = new Vector3(Random.Range(-stats.GetAccuracy().minSpread, stats.GetAccuracy().minSpread), Random.Range(-stats.GetAccuracy().minSpread, stats.GetAccuracy().minSpread), 1);
             go.transform.position = firingPosition.position;
             go.SetActive(true);
             currentBulletsInMag--;

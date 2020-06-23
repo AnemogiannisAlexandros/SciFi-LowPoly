@@ -71,7 +71,6 @@ public class ExperienceManager : MonoBehaviour
             Level++;
             currentExp = currentExp - ExperienceNedded;
             ExperienceNedded = ExperienceFormula();
-
             OnLevelUp.Invoke();
         }
     }

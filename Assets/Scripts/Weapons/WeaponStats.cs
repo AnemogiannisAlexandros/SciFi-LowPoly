@@ -21,12 +21,12 @@ public struct Accuracy
     float accuracyPercent;
     [Tooltip("Weapon's Max Spread Value(1)")]
     [SerializeField]
-    [Range(0f,1f)]
+    [Range(0f,.2f)]
     float maxSpread;
     [Tooltip("Weapon's Min Spread Value")]
-    [Range(0f, 1f)]
+    [Range(0f, .2f)]
     [SerializeField]
-    float minSpread;
+    public float minSpread;
     [Tooltip("How Fast the Weapon Spreads. 100(maxSpread),0(noSpread)")]
     [SerializeField]
     [Range(0, 100)]
@@ -38,8 +38,6 @@ public struct Accuracy
     [Tooltip("How much time in seconds it takes for the Crosshair to start Retracting.")]
     [SerializeField]
     float retractDelay;
-    public Vector3 offset;
-    public Vector3 CalculatedOffset { get; set; }
 }
 
 public class WeaponStats : ScriptableObject
@@ -51,7 +49,8 @@ public class WeaponStats : ScriptableObject
     protected int damage;
     [Tooltip("The weapon's accuracy stats")]
     [SerializeField]
-    protected Accuracy accuracy;
+    public Accuracy accuracy;
+    public Vector3 CalculatedOffset { get; set; }
     [Tooltip("The Higher the less your crosshair sways & lower Recoil")]
     [Range(0, 100)]
     [SerializeField]
@@ -109,5 +108,13 @@ public class WeaponStats : ScriptableObject
     public BulletType GetBulletType() 
     {
         return bulletType;
+    }
+    public void SetFiringRate(float rate) 
+    {
+        fireRate = rate;
+    }
+    public void SetMagazineSize(int size) 
+    {
+        magazineSize = size;
     }
 }
